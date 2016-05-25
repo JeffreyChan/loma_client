@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var uglifyJs = require("uglify-js");
 var fs = require('fs');
 
-
 var app = express();
 
 // view engine setup
@@ -75,6 +74,7 @@ app.use(function (err, req, res, next) {
     error: {}
   });
 });
+
 
 
 module.exports = app;
