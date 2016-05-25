@@ -9,8 +9,10 @@
         controller: 'homeCtrl',
         controllerAs: 'vm'
       })
-      .when('/about', {
-        template: '<h1>hell</h1>'
+      .when('/category', {
+        templateUrl: '/tmp/category/category.view.html',
+        controller: 'categoryCtrl',
+        controllerAs: 'vm'
       })
       .when('/sya', {
         template: '<h1>hell</h1>'

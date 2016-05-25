@@ -16,7 +16,8 @@ app.set('view engine', 'jade');
 var appClientFiles = [
   'src/app/app.js',
   'src/app/app.controller.js',
-  'src/app/home/home.controller.js'
+  'src/app/category/category.ctrl.js',
+  'src/app/home/home.ctrl.js'
 ];
 var uglified = uglifyJs.minify(appClientFiles, { compress: false });
 
