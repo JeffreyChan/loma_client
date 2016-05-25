@@ -9,7 +9,7 @@
         controller: 'homeCtrl',
         controllerAs: 'vm'
       })
-      .when('/category', {
+      .when('/category-list', {
         templateUrl: '/tmp/category/category.view.html',
         controller: 'categoryCtrl',
         controllerAs: 'vm'
