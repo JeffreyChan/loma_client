@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module("lomaApp", ["ngRoute","ngSanitize"]);
+  angular.module("lomaApp", ["ngRoute","ngSanitize","ui.bootstrap"]);
 
   function config($routeProvider, $locationProvider) {
     $routeProvider

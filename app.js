@@ -14,10 +14,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 var appClientFiles = [
-  'src/app/app.js',
-  'src/app/app.controller.js',
-  'src/app/category/category.ctrl.js',
-  'src/app/home/home.ctrl.js'
+  "src/app/app.js",
+  "src/app/app.controller.js",
+  "src/app/home/home.ctrl.js",
+  "src/app/category/category.ctrl.js",  
+  "src/app/category/create.ctrl.js",  
+  "src/app/common/services/category.service.js",
+  "src/app/common/services/popup.service.js",
 ];
 var uglified = uglifyJs.minify(appClientFiles, { compress: false });
 
