@@ -3,8 +3,8 @@
     .module("lomaApp")
     .controller("categoryCtrl", categoryCtrl);
 
-  categoryCtrl.$inject = ['$scope', "$uibModal", "popupService", "categoryService"];
-  function categoryCtrl($scope, $uibModal, popupService, categoryService) {
+  categoryCtrl.$inject = ['$scope', "$uibModal", "commonService", "popupService", "categoryService"];
+  function categoryCtrl($scope, $uibModal, commonService, popupService, categoryService) {
     var vm = this;
     vm.errorMessage = "";
     categoryService.getCategoryList()
@@ -16,25 +16,26 @@
         vm.errorMessage = "Sorry, something's gone wrong, please try again later";
       });
 
-    vm.popupCreateForm = function () {
-      
+    vm.popupCreateOrUpdateForm = function (entityId) {
+
       var customModalOptions = {
         closeButtonText: 'Cancel',
         okButtonText: 'Sumbit',
-        headerText: 'Create Category',
+        headerText: commonService.isEmptyOrNull(entityId) ? "Create Category" : "Update Category",
         bodyText: ''
-        
       };
-      
+
       var modalDefaults = {
-        templateUrl: "/tmp/category/create.view.html",
-        controller:"categoryCreatCtrl",
-        controllerAs:"vm",
-        resolve : {
-          modalData : function () {
+        templateUrl: "tmp/category/updatecreate.view.html",
+        controller: "catCreateOrUpdateCtrl",
+        controllerAs: "vm",
+        resolve: {
+          modalData: function () {
             return {
-              options:customModalOptions,
-              entity:"hello"
+              options: customModalOptions,
+              entity: _.find(vm.catListData, function (cat) {
+                return _.isEqual(cat._id, entityId);
+              })
             };
           }
         }

@@ -9,15 +9,23 @@
 
     function categoryService($http) {
         var baseUrl = "http://localhost:2000";
-        var getCategoryList = function () {
+        var getCategoryListFn = function () {
             return $http.get(baseUrl + '/api/category');
         };
-        var getRootCategory = function () {
+        var getRootCategoryFn = function () {
             return $http.get(baseUrl + '/api/category/root');
         }
+
+        var createCategoryFn = function (category) {
+            console.log("go,go");
+            return $http.post(baseUrl + "/api/category", category,
+                {headers: {'Content-Type': 'application/json'}});
+        }
+
         return {
-            getCategoryList: getCategoryList,
-            getRootCategory : getRootCategory
+            getCategoryList: getCategoryListFn,
+            getRootCategory: getRootCategoryFn,
+            createCategory: createCategoryFn
         };
     }
 

@@ -1,6 +1,11 @@
 (function () {
 
-  angular.module("lomaApp", ["ngRoute","ngSanitize","ui.bootstrap"]);
+  angular.module('underscore', []);
+  angular.module('underscore').factory('_', ['$window', function ($window) {
+    return $window._; // assumes underscore has already been loaded on the page
+  }]);
+
+  angular.module("lomaApp", ["underscore", "ngRoute", "ngSanitize", "ui.bootstrap"]);
 
   function config($routeProvider, $locationProvider) {
     $routeProvider
@@ -32,5 +37,6 @@
   angular
     .module('lomaApp')
     .config(['$routeProvider', '$locationProvider', config]);
+
 
 })();

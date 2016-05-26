@@ -18,9 +18,10 @@ var appClientFiles = [
   "src/app/app.controller.js",
   "src/app/home/home.ctrl.js",
   "src/app/category/category.ctrl.js",  
-  "src/app/category/create.ctrl.js",  
+  "src/app/category/updatecreate.ctrl.js",  
   "src/app/common/services/category.service.js",
   "src/app/common/services/popup.service.js",
+  "src/app/common/services/common.service.js",
 ];
 var uglified = uglifyJs.minify(appClientFiles, { compress: false });
 
@@ -42,6 +43,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'src')));
 app.use("/tmp" , express.static(path.join(__dirname, 'src/app')));
+app.use("/components" , express.static(path.join(__dirname, 'bower_components')));
+
 
 app.get('*', function (req, res) {
   res.sendfile(path.join(__dirname, 'index.html')); // load the single view file (angular will handle the page changes on the front-end)

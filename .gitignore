@@ -4,5 +4,6 @@ typings/
 dist/
 logs/
 bin/
+bower_components/
 # Environment variables
 .env
