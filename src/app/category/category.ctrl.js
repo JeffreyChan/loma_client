@@ -6,14 +6,14 @@
   categoryCtrl.$inject = ['$scope', "$uibModal", "commonService", "popupService", "categoryService"];
   function categoryCtrl($scope, $uibModal, commonService, popupService, categoryService) {
     var vm = this;
-    vm.errorMessage = "";
+    vm.formError = "";
     categoryService.getCategoryList()
       .success(function (data) {
-        vm.errorMessage = data.length > 0 ? "" : "No category found!";
+        vm.formError = data.length > 0 ? "" : "No category found!";
         vm.catListData = data;
       })
       .error(function (e) {
-        vm.errorMessage = "Sorry, something's gone wrong, please try again later";
+        vm.formError = "Sorry, something's gone wrong, please try again later";
       });
 
     vm.popupCreateOrUpdateForm = function (entityId) {

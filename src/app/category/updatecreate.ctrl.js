@@ -12,11 +12,11 @@
         vm.catList = data.entity;
         vm.formData.parent = vm.catList[0]._id;
       }).error(function (err) {
-        vm.errorMessage = "Sorry, something's gone wrong, please try again later";
+        vm.formError = "Sorry, something's gone wrong, please try again later";
       });
 
     vm.modalData = modalData;
-    vm.errorMessage = "";
+    vm.formError = "";
     vm.modal = {
       ok: function (result) {
         $uibModalInstance.close(result);
@@ -30,23 +30,22 @@
 
     vm.onSubmit = function () {
       if (commonService.isEmptyOrNull(vm.formData._id)) {
-        categoryService.createCategory(vm.formData)
-          .success(function (data) {
-            console.log("right");
-            vm.modal.ok(data);
-          })
-          .error(function (data) {
-
-            vm.formError = "category has not been saved, please try again";
-          });
-        return false;
+        vm.doAddCategory(vm.formData);
       } else {
         return false;
       }
     };
 
     vm.doAddCategory = function (categoryData) {
-
+      categoryService.createCategory(categoryData)
+        .success(function (data) {
+          console.log("right");
+          vm.modal.ok(data);
+        })
+        .error(function (errorInfo) {
+          vm.formError = errorInfo.error;
+        });
+      return false;
     };
   }
 })();
