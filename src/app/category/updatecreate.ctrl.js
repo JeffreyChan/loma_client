@@ -7,6 +7,11 @@
   function catCreateOrUpdateCtrl($scope, commonService, $uibModalInstance, modalData, categoryService) {
     var vm = this;
     vm.catList = [];
+    vm.modalData = modalData;
+    vm.formData = vm.modalData.entity || {};
+    vm.isCreateFlag = commonService.isEmptyOrNull(vm.formData._id);
+    vm.formError = "";
+
     categoryService.getRootCategory()
       .success(function (data) {
         vm.catList = data.entity;
@@ -15,8 +20,6 @@
         vm.formError = "Sorry, something's gone wrong, please try again later";
       });
 
-    vm.modalData = modalData;
-    vm.formError = "";
     vm.modal = {
       ok: function (result) {
         $uibModalInstance.close(result);
@@ -26,21 +29,29 @@
       }
     };
 
-    vm.formData = vm.modalData.entity || {};
-
     vm.onSubmit = function () {
-      if (commonService.isEmptyOrNull(vm.formData._id)) {
+      if (vm.isCreateFlag) {
         vm.doAddCategory(vm.formData);
       } else {
-        return false;
+        vm.doUpdateCategory(vm.formData);
       }
     };
-
+    
+    vm.doUpdateCategory = function (categoryData) {
+      categoryService.updateCategory(categoryData)
+        .success(function (data) {
+          vm.modal.ok(data.entity);
+        })
+        .error(function (errorInfo) {
+          vm.formError = errorInfo.error;
+        });
+      return false;
+    }
+    
     vm.doAddCategory = function (categoryData) {
       categoryService.createCategory(categoryData)
         .success(function (data) {
-          console.log("right");
-          vm.modal.ok(data);
+          vm.modal.ok(data.entity);
         })
         .error(function (errorInfo) {
           vm.formError = errorInfo.error;

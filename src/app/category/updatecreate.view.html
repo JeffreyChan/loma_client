@@ -1,17 +1,17 @@
 <div class="modal-content">
-  <form id="addReview" name="addReview" role="form" class="form-horizontal">
+  <form id="addReview" name="categoryForm" role="form" class="form-horizontal" data-ng-submit="vm.onSubmit()">
     <div class="modal-header">
       <button type="button" class="close" data-ng-click="vm.modal.cancel()" aria-hidden="true">×</button>
       <h4 class="modal-title" id="myModalLabel">{{vm.modalData.options.headerText}}</h4>
     </div>
     <div class="modal-body">
       <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
-      <div class="form-group">
+      <div class="form-group" ng-show="vm.isCreateFlag">
 
         <label for="parent" class="col-sm-4 control-label">Parent Category</label>
         <div class="col-sm-8">
-          <select id="parent" name="parent" class="form-control input-sm" ng-model="vm.formData.parent" 
-            required ng-options='option._id as option.name for option in vm.catList'>
+          <select id="parent" name="parent" class="form-control input-sm" ng-model="vm.formData.parent" ng-options='option._id as option.name for option in vm.catList'>
+            <option value="">-- Select an option--</option>
           </select>
         </div>
 
@@ -19,18 +19,20 @@
       <div class="form-group">
         <label for="name" class="col-sm-4 control-label">Name</label>
         <div class="col-sm-8">
-          <input id="name" name="name" class="form-control" placeholder="Category Name" required  ng-model="vm.formData.name" />
+          <input id="name" name="name" class="form-control" placeholder="Category Name" required ng-model="vm.formData.name" />
+          <!-- show an error if this isn't filled in -->
+          <p ng-show="categoryForm.name.$error.required">category name is required.</p>
         </div>
       </div>
       <div class="form-group">
         <label for="desc" class="col-sm-4 control-label">Desc</label>
         <div class="col-sm-8">
-          <textarea id="desc" name="review" class="form-control" rows="3"  ng-model="vm.formData.desc" ></textarea>
+          <textarea id="desc" name="review" class="form-control" rows="3" ng-model="vm.formData.desc"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-ng-click="vm.modal.cancel()">{{vm.modalData.options.closeButtonText}}</button>
-        <button type="button" class="btn btn-primary" data-ng-click="vm.onSubmit()">{{vm.modalData.options.okButtonText}}</button>
+        <button type="submit" class="btn btn-primary">{{vm.modalData.options.okButtonText}}</button>
       </div>
 
     </div>
