@@ -9,8 +9,10 @@
 
     function categoryService($http) {
         var baseUrl = "http://localhost:2000";
-        var getCategoryListFn = function () {
-            return $http.get(baseUrl + '/api/category');
+        var getCategoryListFn = function (page, size) {
+            page = page || 1;
+            size = size || 10;
+            return $http.get("{0}/{1}?page={2}&size={3}".format(baseUrl,"api/category", page, size));
         };
         var getRootCategoryFn = function () {
             return $http.get("{0}/{1}".format(baseUrl, "api/category/root"));

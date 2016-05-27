@@ -16,3 +16,5 @@
   text-align: left;
   vertical-align: middle;
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
