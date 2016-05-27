@@ -16,9 +16,15 @@
     return $window._; // assumes underscore has already been loaded on the page
   }]);
 
-  angular.module("lomaApp", ["underscore", "ngRoute", "ngSanitize", "ui.bootstrap", "ngMessages", "ui-notification"]);
+  var myModule = angular.module("lomaApp", [
+    "underscore",
+    "ngRoute",
+    "ngSanitize",
+    "ui.bootstrap",
+    "ngMessages",
+    "ui-notification"]);
 
-  function config($routeProvider, $locationProvider, NotificationProvider) {
+  function config($routeProvider, $locationProvider, $httpProvider, NotificationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: '/tmp/home/home.view.html',
@@ -44,6 +50,7 @@
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
 
+    // Notification global setting
     NotificationProvider.setOptions({
       delay: 3000,
       startTop: 20,
@@ -55,8 +62,6 @@
     });
   }
 
-  angular
-    .module('lomaApp')
-    .config(['$routeProvider', '$locationProvider', 'NotificationProvider', config])
-
+  myModule
+    .config(['$routeProvider', '$locationProvider', "$httpProvider", 'NotificationProvider', config]);
 })();

@@ -4,9 +4,9 @@
         .module('lomaApp')
         .service('commonService', commonService);
 
-    commonService.$inject = ['$http', "_"];
+    commonService.$inject = ["_"];
 
-    function commonService($http, _) {
+    function commonService(_) {
         var isEmptyOrNull = function (entity) {
             return _.isEmpty(entity) || entity === null || _.isUndefined(entity);
         }

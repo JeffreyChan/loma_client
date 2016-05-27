@@ -3,8 +3,20 @@
     .module("lomaApp")
     .controller("catCreateOrUpdateCtrl", catCreateOrUpdateCtrl);
 
-  catCreateOrUpdateCtrl.$inject = ['$scope', "commonService", "$uibModalInstance", "modalData", "categoryService"];
-  function catCreateOrUpdateCtrl($scope, commonService, $uibModalInstance, modalData, categoryService) {
+  catCreateOrUpdateCtrl.$inject = [
+    "$scope",
+    "commonService",
+    "$uibModalInstance",
+    "modalData",
+    "categoryService",
+    "popupService"];
+  function catCreateOrUpdateCtrl(
+    $scope,
+    commonService,
+    $uibModalInstance,
+    modalData,
+    categoryService,
+    popupService) {
     var vm = this;
     vm.catList = [];
     vm.modalData = modalData;
@@ -36,7 +48,7 @@
         vm.doUpdateCategory(vm.formData);
       }
     };
-    
+
     vm.doUpdateCategory = function (categoryData) {
       categoryService.updateCategory(categoryData)
         .success(function (data) {
@@ -47,7 +59,7 @@
         });
       return false;
     }
-    
+
     vm.doAddCategory = function (categoryData) {
       categoryService.createCategory(categoryData)
         .success(function (data) {

@@ -3,7 +3,14 @@
     .module("lomaApp")
     .controller("categoryCtrl", categoryCtrl);
 
-  categoryCtrl.$inject = ['$scope', "$uibModal", "commonService", "popupService", "categoryService", "$timeout", "Notification"];
+  categoryCtrl.$inject = [
+    '$scope',
+    "$uibModal",
+    "commonService",
+    "popupService",
+    "categoryService",
+    "$timeout",
+    "Notification"];
   function categoryCtrl($scope, $uibModal, commonService, popupService, categoryService, $timeout, Notification) {
     var vm = this;
 
@@ -15,7 +22,6 @@
     vm.pageMaxSize = 10;
 
     vm.initCategoryList = function (page, size) {
-      
       categoryService.getCategoryList(page, size)
         .success(function (data) {
           if (commonService.isEmptyOrNull(data.entity)) {
@@ -62,7 +68,7 @@
           .success(function (data) {
             $timeout(function () {
               vm.initCategoryList();
-            }, 1000);
+            }, 500);
 
             Notification.success("Delete category successfully");
           })
@@ -73,10 +79,10 @@
     }
 
     vm.popupCreateOrUpdateForm = function (entityId) {
-
+      entityId = entityId || "";
       var tmpEntity = _.find(vm.catListData, function (cat) {
         return _.isEqual(cat._id, entityId);
-      });
+      }) || {};
       var customModalOptions = {
         closeButtonText: 'Cancel',
         okButtonText: 'Sumbit',
@@ -109,7 +115,7 @@
         Notification.success(tmpMessage);
         $timeout(function () {
           vm.initCategoryList(vm.currentPage, vm.pageCount);
-        }, 1000);
+        }, 500);
       });
     };
   }
