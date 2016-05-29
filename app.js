@@ -19,7 +19,11 @@ var appClientFiles = [
   "src/app/home/home.ctrl.js",
   "src/app/category/category.ctrl.js",
   "src/app/category/updatecreate.ctrl.js",
+  "src/app/question/question.ctrl.js",
+  "src/app/question/create.ctrl.js",
+  "src/app/common/directives/showerror.directive.js",
   "src/app/common/services/category.service.js",
+  "src/app/common/services/question.service.js",
   "src/app/common/services/popup.service.js",
   "src/app/common/services/common.service.js",
 ];

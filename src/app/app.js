@@ -32,12 +32,14 @@
         controllerAs: 'vm'
       })
       .when('/category-list', {
-        templateUrl: '/tmp/category/category.view.html',
+        templateUrl: '/tmp/category/list.view.html',
         controller: 'categoryCtrl',
         controllerAs: 'vm'
       })
-      .when('/sya', {
-        template: '<h1>hell</h1>'
+      .when('/question-list', {
+        templateUrl: '/tmp/question/list.view.html',
+        controller: 'questionCtrl',
+        controllerAs: 'vm'
       })
       .when('/register', {
         template: '<h1>hell</h1>'
@@ -61,6 +63,10 @@
       positionY: 'top'
     });
   }
+  
+  myModule.value("LOMA_CONFIG", {
+    rootUrl:"http://localhost:2000"
+  });
 
   myModule
     .config(['$routeProvider', '$locationProvider', "$httpProvider", 'NotificationProvider', config]);

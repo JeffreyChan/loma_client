@@ -10,7 +10,7 @@
 
         <label for="parent" class="col-sm-4 control-label">Parent Category</label>
         <div class="col-sm-8">
-          <select id="parent" name="parent" class="form-control input-sm" ng-model="vm.formData.parent" ng-options='option._id as option.name for option in vm.catList'>
+          <select id="parent" name="parent" class="form-control input-sm" ng-model="vm.formData.parent" ng-options="option._id as option.name for option in vm.catList">
             <option value="">-- Select an option--</option>
           </select>
         </div>

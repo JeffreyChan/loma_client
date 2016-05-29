@@ -1,0 +1,49 @@
+<div class="modal-content">
+    <form name="questionForm" novalidate role="form" class="form-horizontal">
+        <div class="modal-header">
+            <button type="button" class="close" data-ng-click="vm.modal.cancel()" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">{{vm.modalData.options.headerText}}</h4>
+        </div>
+        <div class="modal-body">
+            <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
+            <div class="form-group">
+
+                <label for="category" class="col-sm-4 control-label">Category</label>
+                <div class="col-sm-8">
+                    <select id="category" name="category" class="form-control input-sm" ng-model="vm.formData.category" ng-options="option._id as option.name group by option.parentname for option in vm.catList">
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group" show-errors>
+                <label for="title" class="col-sm-4 control-label">Title</label>
+                <div class="col-sm-8">
+                    <input id="title" name="title" class="form-control" placeholder="Quetion Title" required ng-model="vm.formData.title" />
+                    <!-- show an error if this isn't filled in -->
+                    <p class="help-block" ng-if="questionForm.title.$error.required">question title is required.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tip" class="col-sm-4 control-label">Tip</label>
+                <div class="col-sm-8">
+                    <input id="tip" name="tip" class="form-control" placeholder="Quetion tip" required ng-model="vm.formData.tip" />
+                </div>
+            </div>
+            <div class="form-group" ng-repeat="option in vm.answerOptions">
+                <ng-form name="answerFieldForm" show-errors>
+                    <label for="answer" class="col-sm-4 control-label">{{$index + 1}}.</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="answer" ng-model="option.answer" required>
+                        <p class="help-block" ng-if="answerFieldForm.answer.$error.required">question anwswer{{$index + 1}} Required</p>
+                    </div>
+                </ng-form>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-ng-click="vm.modal.cancel()">{{vm.modalData.options.closeButtonText}}</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.onSubmit()">{{vm.modalData.options.okButtonText}}</button>
+        </div>
+        <form>
+</div>

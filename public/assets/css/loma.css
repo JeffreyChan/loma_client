@@ -18,3 +18,16 @@
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+div.questionModal .modal-content {
+    max-height: 600px;
+    overflow: auto;
+}
+
+.form-group .help-block {
+  display: none;
+}
+
+.form-group.has-error .help-block {
+  display: block;
+}
