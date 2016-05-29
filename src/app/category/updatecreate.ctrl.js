@@ -42,6 +42,11 @@
     };
 
     vm.onSubmit = function () {
+      $scope.$broadcast('show-errors-check-validity');
+      if ($scope.categoryForm.$invalid) {
+        return;
+      }
+
       if (vm.isCreateFlag) {
         vm.doAddCategory(vm.formData);
       } else {

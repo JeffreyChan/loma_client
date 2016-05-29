@@ -1,0 +1,23 @@
+<div class="modal-content">
+    <form name="optionForm" novalidate role="form" class="form-horizontal">
+        <div class="modal-header">
+            <button type="button" class="close" data-ng-click="vm.modal.cancel()" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">{{vm.modalData.options.headerText}}</h4>
+        </div>
+        <div class="modal-body">
+            <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
+            <div class="form-group" show-errors>
+                <label for="answer" class="col-sm-2 control-label">Answer</label>
+                <div class="col-sm-10">
+                    <input id="answer" name="answer" class="form-control" placeholder="option answer" required ng-model="vm.formData.answer" />
+                    <!-- show an error if this isn't filled in -->
+                    <p class="help-block" ng-if="optionForm.answer.$error.required">question title is required.</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-ng-click="vm.modal.cancel()">{{vm.modalData.options.closeButtonText}}</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.onSubmit()">{{vm.modalData.options.okButtonText}}</button>
+        </div>
+        <form>
+</div>

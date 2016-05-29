@@ -15,14 +15,11 @@
                 var inputNgEl = angular.element(inputEl);
                 // get the name on the text box
                 var inputName = inputNgEl.attr('name');
-                
-                console.log(formCtrl);
 
                 // only apply the has-error class after the user leaves the text box
                 var blurred = false;
                 inputNgEl.bind('blur', function () {
                     blurred = true;
-                    console.log(formCtrl);
                     el.toggleClass('has-error', formCtrl[inputName].$invalid);
                 });
                

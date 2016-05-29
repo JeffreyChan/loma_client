@@ -4,18 +4,22 @@
         .controller("quesCreateCtrl", quesCreateCtrl);
 
     quesCreateCtrl.$inject = [
+        "_",
         "$scope",
         "modalData",
         "commonService",
         "$uibModalInstance",
         "categoryService",
+        "questionService",
         "popupService"];
     function quesCreateCtrl(
+        _,
         $scope,
         modalData,
         commonService,
         $uibModalInstance,
         categoryService,
+        questionService,
         popupService) {
 
         var vm = this;
@@ -56,27 +60,24 @@
         };
 
         vm.onSubmit = function () {
+            vm.formError = "";
             $scope.$broadcast('show-errors-check-validity');
             if ($scope.questionForm.$invalid) {
-                //$scope.answerFieldForm.$setDirty();
                 return;
             }
-            console.log(vm.answerOptions);
+            var answerCount = _.countBy(vm.answerOptions, function (item) {
+                return item.isCorrect ? "Right" : "Wrong";
+            });
+            if (answerCount["Right"] !== 1) {
+                vm.formError = "the question's option must have only one right answer!";
+                return;
+            }
+            vm.formData.options = vm.answerOptions;
+            vm.doAddQuestion(vm.formData);
         };
 
-        vm.doUpdateCategory = function (categoryData) {
-            categoryService.updateCategory(categoryData)
-                .success(function (data) {
-                    vm.modal.ok(data.entity);
-                })
-                .error(function (errorInfo) {
-                    vm.formError = errorInfo.error;
-                });
-            return false;
-        }
-
-        vm.doAddCategory = function (categoryData) {
-            categoryService.createCategory(categoryData)
+        vm.doAddQuestion = function (questionEntity) {
+            questionService.createQuestion(questionEntity)
                 .success(function (data) {
                     vm.modal.ok(data.entity);
                 })

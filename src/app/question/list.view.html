@@ -27,7 +27,6 @@
                                 <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline">
                                     <thead>
                                         <tr>
-                                            <th>id</th>
                                             <th>category</th>
                                             <th>title</th>
                                             <th>create date</th>
@@ -35,14 +34,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="cat in vm.questionData">
-                                            <td>{{cat._id}}</td>
-                                            <td>{{cat.name}}</td>
-                                            <td>{{cat.desc}}</td>
-                                            <td>{{cat.create_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <tr ng-repeat="question in vm.questionData">
+                                            <td>{{question.category}}</td>
+                                            <td >{{question.title}}
+                                            </td>
+                                            <td>{{question.create_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                             <td class="center">
-                                                <a ng-click="vm.popupCreateOrUpdateForm(cat._id)" href="#"><span class="glyphicon glyphicon-edit"> Edit</span></a>                                                |
-                                                <a href="#" ng-click="vm.popupremoveForm(cat._id)"><span class="glyphicon glyphicon-remove-circle"> delete</span></a>
+                                                <a ng-click="vm.popupUpdateForm(question._id)" href="#"><span class="glyphicon glyphicon-edit"> Edit</span></a>                                                |
+                                                <a href="#" ng-click="vm.popupremoveForm(question._id)"><span class="glyphicon glyphicon-remove-circle"> delete</span></a>
                                             </td>
                                         </tr>
                                     </tbody>

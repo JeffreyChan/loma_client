@@ -61,23 +61,22 @@
       });
     };
 
-    vm.popupremoveForm = function (entityid) {
+    vm.popupremoveForm = function (entityId) {
       var customModalOptions = {
         closeButtonText: 'Cancel',
         okButtonText: 'Confirm',
-        headerText: "Delete Category",
-        bodyText: "Are you sure you want to delete this category?",
-        entityId: entityid
+        headerText: "Delete question",
+        bodyText: "Are you sure you want to delete this question?"
       };
 
       popupService.showModal({}, customModalOptions).then(function (result) {
-        categoryService.removeCategory(customModalOptions.entityId)
+        questionService.removeQuestion(entityId)
           .success(function (data) {
             $timeout(function () {
-              vm.initCategoryList();
+              vm.initQuestionList(vm.currentPage, vm.pageCount);
             }, 500);
 
-            Notification.success("Delete category successfully");
+            Notification.success("Delete question successfully");
           })
           .error(function (errorInfo) {
             Notification.error({ message: errorInfo.error, delay: 5000 });
@@ -106,11 +105,42 @@
       };
 
       popupService.showModal(modalDefaults, customModalOptions).then(function (result) {
-        /*var tmpMessage = customModalOptions.isCreateFlag ? "Create Category done!" : "Update Category done!";
+        var tmpMessage = "Create Question done!";
         Notification.success(tmpMessage);
         $timeout(function () {
-          vm.initCategoryList(vm.currentPage, vm.pageCount);
-        }, 500);*/
+          vm.initQuestionList(vm.currentPage, vm.pageCount);
+        }, 500);
+      });
+    };
+
+    vm.popupUpdateForm = function (entityId) {
+      entityId = entityId || "";
+      var customModalOptions = {
+        closeButtonText: 'Cancel',
+        okButtonText: 'Sumbit',
+        headerText: "update Question"
+      };
+
+      var modalDefaults = {
+        templateUrl: "tmp/question/update.view.html",
+        controller: "quesUpdateCtrl",
+        controllerAs: "vm",
+        resolve: {
+          modalData: function () {
+            return {
+              options: customModalOptions,
+              questionId: entityId
+            };
+          }
+        }
+      };
+
+      popupService.showModal(modalDefaults, customModalOptions).then(function (result) {
+        var tmpMessage = "Update Question done!";
+        Notification.success(tmpMessage);
+        $timeout(function () {
+          vm.initQuestionList(vm.currentPage, vm.pageCount);
+        }, 500);
       });
     };
   }
