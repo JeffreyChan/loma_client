@@ -67,7 +67,7 @@
         categoryService.removeCategory(customModalOptions.entityId)
           .success(function (data) {
             $timeout(function () {
-              vm.initCategoryList();
+               vm.initCategoryList(vm.currentPage, vm.pageCount);
             }, 500);
 
             Notification.success("Delete category successfully");

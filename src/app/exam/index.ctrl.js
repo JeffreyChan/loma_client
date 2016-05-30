@@ -52,7 +52,10 @@
                     modalData: function () {
                         return {
                             options: customModalOptions,
-                            categoryId : vm.formData.category
+                            categoryId : vm.formData.category,
+                            categoryName: _.find(vm.catList, function(item){
+                                return _.isEqual(item._id, vm.formData.category);
+                            }).name
                         };
                     }
                 }

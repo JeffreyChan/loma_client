@@ -2,7 +2,8 @@
 
     angular
         .module('lomaApp')
-        .service('popupService', ["$uibModal", function ($uibModal) {
+        .service('popupService', [ "$uibModal", function ($uibModal) {
+
             var modalDefaults = {
                 animation: true,
                 backdrop: true,

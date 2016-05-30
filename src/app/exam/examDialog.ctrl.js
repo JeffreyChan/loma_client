@@ -6,20 +6,24 @@
     examDialogCtrl.$inject = [
         "_",
         "$scope",
+        "$timeout",
         "modalData",
         "commonService",
         "$uibModalInstance",
         "categoryService",
         "questionService",
+        "examService",
         "popupService"];
     function examDialogCtrl(
         _,
         $scope,
+        $timeout,
         modalData,
         commonService,
         $uibModalInstance,
         categoryService,
         questionService,
+        examService,
         popupService) {
 
         var vm = this;
@@ -27,11 +31,19 @@
         vm.modalData = modalData;
         vm.formError = "";
         vm.formData = {};
-        vm.windowsCount = 1;
+        vm.windowsCount = 6;
 
         vm.onSubmit = function () {
             vm.formError = "";
-            console.log(vm.questionList);
+            var anwserCount = _.countBy(vm.questionList, function (item) {
+                return _.find(item.options, function (option) {
+                    return option.isCorrect;
+                }) ? "answer" : "noanswer";
+            });
+            if (anwserCount.noanswer > 0) {
+                vm.formError = "You have {0} questions need to answer!".format(anwserCount.noanswer);
+                return;
+            }
         }
 
         vm.modal = {
@@ -43,75 +55,24 @@
             }
         };
 
-        vm.questionList = [
-            {
-                "_id": "574baa0026e2b24031bc2c3c",
-                "category": "5747e15b0f0f96e42ac4d173",
-                "title": "test",
-                "tip": "11",
-                "correct": "574baa0026e2b24031bc2c38",
-                "__v": 0,
-                "create_date": "2016-05-30T02:48:32.517Z",
-                "random": [
-                    0.0785922019276768,
-                    0.04945577774196863
-                ],
-                "options": [
-                    {
-                        "_id": "574baa0026e2b24031bc2c38",
-                        "answer": "1"
-                    },
-                    {
-                        "_id": "574baa0026e2b24031bc2c39",
-                        "answer": "2"
-                    },
-                    {
-                        "_id": "574baa0026e2b24031bc2c3a",
-                        "answer": "3"
-                    },
-                    {
-                        "_id": "574baa0026e2b24031bc2c3b",
-                        "answer": "4"
-                    }
-                ]
-            },
-            {
-                "_id": "574baa0026e2b24031bc2c3f",
-                "category": "5747e15b0f0f96e42ac4d173",
-                "title": "test",
-                "tip": "11",
-                "correct": "574baa0026e2b24031bc2c31",
-                "__v": 0,
-                "create_date": "2016-05-30T02:48:32.517Z",
-                "random": [
-                    0.0785922019276768,
-                    0.04945577774196863
-                ],
-                "options": [
-                    {
-                        "_id": "574baa0026e2b24031bc2c31",
-                        "answer": "1"
-                    },
-                    {
-                        "_id": "574baa0026e2b24031bc2c32",
-                        "answer": "2"
-                    },
-                    {
-                        "_id": "574baa0026e2b24031bc2c33",
-                        "answer": "3"
-                    },
-                    {
-                        "_id": "574baa0026e2b24031bc2c34",
-                        "answer": "4"
-                    }
-                ]
-            }
-        ];
+        vm.doGetExamQuestion = function () {
+            examService.getQuestionsByCategory(vm.modalData.categoryId).success(function (data) {
+                vm.questionList = data.entity;
 
-        vm.windowQuestionList = _.chain(vm.questionList).groupBy(function (element, index) {
-            return Math.floor(index / vm.windowsCount);
-        }).toArray().value();
-
-        console.log(vm.windowQuestionList);
+                vm.windowQuestionList = _.chain(vm.questionList).groupBy(function (element, index) {
+                    return Math.floor(index / vm.windowsCount);
+                }).toArray().value();
+                
+                popupService.closeDialog();
+            }).error(function (err) {
+                popupService.closeDialog();
+                vm.formError = "Sorry, something's gone wrong, please try again later";
+            });
+        }
+        popupService.showDialog();
+        $timeout(function(){
+            vm.doGetExamQuestion();
+        },1500)
+        
     }
 })();

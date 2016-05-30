@@ -28,6 +28,7 @@ var appClientFiles = [
   "src/app/common/directives/showerror.directive.js",
   "src/app/common/services/category.service.js",
   "src/app/common/services/question.service.js",
+  "src/app/common/services/exam.service.js",
   "src/app/common/services/popup.service.js",
   "src/app/common/services/common.service.js",
 ];
