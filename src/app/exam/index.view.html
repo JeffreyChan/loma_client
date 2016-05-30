@@ -1,0 +1,41 @@
+<div id="page-wrapper">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Examination
+
+                </div>
+                <div class="panel-body">
+                    <form name="examForm" novalidate role="form" class="form-horizontal">
+                        <div class="form-group" show-errors>
+                            <label for="username" class="col-sm-1 control-label">User Name</label>
+                            <div class="col-sm-3">
+                                <input id="name" name="username" class="form-control" placeholder="User Name" required ng-model="vm.formData.userName" />
+                                <!-- show an error if this isn't filled in -->
+                                <p class="help-block" ng-if="examForm.username.$error.required">user name is required.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category" class="col-sm-1 control-label">Exam type</label>
+                            <div class="col-sm-3">
+                                <select id="category" name="category" class="form-control input-sm" ng-model="vm.formData.category" ng-options="option._id as option.name group by option.parentname for option in vm.catList">
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-primary" data-ng-click="vm.onSubmit()" >Exam</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    <em><strong>    chapter exam, sample exam, random exam</strong></em>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>

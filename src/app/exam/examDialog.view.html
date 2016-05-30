@@ -1,0 +1,50 @@
+<div class="modal-content">
+    <form name="examForm" role="form" class="form-horizontal" novalidate>
+        <div class="modal-header">
+            <button type="button" class="close" data-ng-click="vm.modal.cancel()" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">{{vm.modalData.options.headerText}}</h4>
+        </div>
+        <div class="modal-body">
+            <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            chapter exam
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills">
+                                <li ng-class="{ 'active' : $index === 0 }" ng-repeat="ql in vm.windowQuestionList"><a href="#section-{{$index+1}}" data-toggle="tab" aria-expanded="true">Section{{$index+1}}</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade" ng-class="{ 'active in' : $index === 0 }" ng-repeat="questionList in vm.windowQuestionList" id="section-{{$index+1}}">
+                                    <div class="col-sm-6" ng-repeat="questionItem in questionList">
+                                        <div class="form-group">
+                                            <h4><strong>{{$parent.$index*vm.windowsCount+1 }}.</strong> {{questionItem.title}} </h4>
+                                            <div class="radio" ng-repeat="option in questionItem.options">
+                                                <label>
+                                                    <input type="radio" data-ng-value="true" ng-required="!option.isCorrect" ng-model="option.isCorrect" 
+                                                        name="section-{{$parent.$parent.$index+1}}-{{$parent.$index+1}}">{{option.answer}}
+                                                    </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-ng-click="vm.modal.cancel()">{{vm.modalData.options.closeButtonText}}</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.onSubmit()">{{vm.modalData.options.okButtonText}}</button>
+        </div>
+        <form>
+</div>

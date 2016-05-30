@@ -23,6 +23,8 @@ var appClientFiles = [
   "src/app/question/create.ctrl.js",
   "src/app/question/update.ctrl.js",
   "src/app/question/option.ctrl.js",
+  "src/app/exam/index.ctrl.js",
+  "src/app/exam/examDialog.ctrl.js",
   "src/app/common/directives/showerror.directive.js",
   "src/app/common/services/category.service.js",
   "src/app/common/services/question.service.js",

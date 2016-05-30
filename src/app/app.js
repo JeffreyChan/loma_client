@@ -41,6 +41,11 @@
         controller: 'questionCtrl',
         controllerAs: 'vm'
       })
+      .when('/exam', {
+        templateUrl: '/tmp/exam/index.view.html',
+        controller: 'examCtrl',
+        controllerAs: 'vm'
+      })
       .when('/register', {
         template: '<h1>hell</h1>'
       })
@@ -63,7 +68,7 @@
       positionY: 'top'
     });
   }
-  
+
   myModule.value("LOMA_CONFIG", {
     rootUrl:"http://localhost:2000"
   });

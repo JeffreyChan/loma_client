@@ -31,3 +31,7 @@ div.questionModal .modal-content {
 .form-group.has-error .help-block {
   display: block;
 }
+
+div.examModal .modal-dialog {
+    width: 90%;
+}
