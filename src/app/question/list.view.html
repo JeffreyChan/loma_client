@@ -36,7 +36,7 @@
                                     <tbody>
                                         <tr ng-repeat="question in vm.questionData">
                                             <td>{{question.category}}</td>
-                                            <td>{{question.title}}
+                                            <td><span data-ng-bind-html="question.title | limitTo:200 | addHtmlLineBreaks">
                                             </td>
                                             <td>{{question.create_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                             <td class="center">

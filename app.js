@@ -33,6 +33,7 @@ var appClientFiles = [
   "src/app/common/services/exam.service.js",
   "src/app/common/services/popup.service.js",
   "src/app/common/services/common.service.js",
+  "src/app/common/filters/addHtmlLinebreaks.filter.js"
 ];
 var uglified = uglifyJs.minify(appClientFiles, { compress: false });
 

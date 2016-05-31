@@ -93,6 +93,7 @@
 
       var modalDefaults = {
         templateUrl: "tmp/question/create.view.html",
+        size: "lg",
         controller: "quesCreateCtrl",
         controllerAs: "vm",
         resolve: {
@@ -123,6 +124,7 @@
 
       var modalDefaults = {
         templateUrl: "tmp/question/update.view.html",
+        size: "lg",
         controller: "quesUpdateCtrl",
         controllerAs: "vm",
         resolve: {

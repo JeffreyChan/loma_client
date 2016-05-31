@@ -22,9 +22,15 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane fade" ng-class="{ 'active in' : $index === 0 }" ng-repeat="questionList in vm.windowQuestionList" id="section-{{$index+1}}">
-                                    <div class="col-sm-5" style="margin-right:110px" ng-repeat="questionItem in questionList">
+                                    <div class="col-sm-12" ng-repeat="questionItem in questionList">
                                         <div class="form-group">
-                                            <h4><strong>{{$parent.$index*vm.windowsCount+$index+1 }}.</strong>  {{questionItem.title}} </h4>
+                                            <div class="alert alert-info alert-dismissable">
+                                                <h4>
+                                                    <strong>{{$parent.$index*vm.windowsCount+$index+1 }}.</strong>
+                                                    <span ng-bind-html="questionItem.title | addHtmlLineBreaks"></span>
+                                               </h4>
+                                            </div>
+
                                             <div class="radio" ng-repeat="option in questionItem.options">
                                                 <label>
                                                     <input type="radio" data-ng-value="true" ng-required="!option.isCorrect" ng-model="option.isCorrect" 

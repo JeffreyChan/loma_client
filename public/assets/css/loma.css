@@ -40,3 +40,7 @@ div.questionModal .modal-content {
 div.examModal .modal-dialog {
     width: 90%;
 }
+
+textarea {
+   resize: none;
+}
