@@ -44,6 +44,24 @@
                 vm.formError = "You have {0} questions need to answer!".format(anwserCount.noanswer);
                 return;
             }
+            var flatExamData = {
+                user: vm.modalData.username,
+                category: vm.modalData.categoryId,
+                answerQuestions: []
+
+            };
+            var flatQA = _.map(vm.questionList, function (question) {
+                return {
+                    Q: question._id,
+                    A: _.find(question.options, function (option) {
+                        return option.isCorrect
+                    })._id
+                }
+            });
+
+            flatExamData.answerQuestions = flatQA;
+
+            vm.doCreateExamRecord(flatExamData);
         }
 
         vm.modal = {
@@ -62,17 +80,29 @@
                 vm.windowQuestionList = _.chain(vm.questionList).groupBy(function (element, index) {
                     return Math.floor(index / vm.windowsCount);
                 }).toArray().value();
-                
+
                 popupService.closeDialog();
             }).error(function (err) {
                 popupService.closeDialog();
                 vm.formError = "Sorry, something's gone wrong, please try again later";
             });
         }
+
+        vm.doCreateExamRecord = function (examRecord) {
+            examService.createExamRecord(examRecord)
+                .success(function (data) {
+                    vm.modal.ok(data.entity);
+                })
+                .error(function (errorInfo) {
+                    vm.formError = errorInfo.error;
+                });
+            return false;
+        }
+
         popupService.showDialog();
-        $timeout(function(){
+        $timeout(function () {
             vm.doGetExamQuestion();
-        },1500)
-        
+        }, 1500)
+
     }
 })();

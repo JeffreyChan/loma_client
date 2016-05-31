@@ -6,11 +6,13 @@
     examCtrl.$inject = [
         "_",
         "$scope",
+        "Notification",
         "categoryService",
         "popupService"];
     function examCtrl(
         _,
         $scope,
+        Notification,
         categoryService,
         popupService) {
 
@@ -55,18 +57,16 @@
                             categoryId : vm.formData.category,
                             categoryName: _.find(vm.catList, function(item){
                                 return _.isEqual(item._id, vm.formData.category);
-                            }).name
+                            }).name,
+                            username:vm.formData.userName
                         };
                     }
                 }
             };
 
             popupService.showModal(modalDefaults, customModalOptions).then(function (result) {
-                var tmpMessage = "Create Question done!";
-               /* Notification.success(tmpMessage);
-                $timeout(function () {
-                    vm.initQuestionList(vm.currentPage, vm.pageCount);
-                }, 500);*/
+                var tmpMessage = "Your Exam done!";
+                Notification.success(tmpMessage);
             });
         }
 

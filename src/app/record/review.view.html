@@ -4,13 +4,14 @@
             <button type="button" class="close" data-ng-click="vm.modal.cancel()" aria-hidden="true">×</button>
             <h4 class="modal-title" id="myModalLabel">{{vm.modalData.options.headerText}}</h4>
         </div>
-        <div id="examBody" class="modal-body">
+        <div class="modal-body">
             <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-green">
                         <div class="panel-heading">
-                            {{vm.modalData.categoryName}} exam
+                            {{vm.modalData.record.user + " " + vm.modalData.record.category + " exam; right:"+vm.modalData.record.right + " wrong:" +
+                            vm.modalData.record.wrong}}
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -24,12 +25,18 @@
                                 <div class="tab-pane fade" ng-class="{ 'active in' : $index === 0 }" ng-repeat="questionList in vm.windowQuestionList" id="section-{{$index+1}}">
                                     <div class="col-sm-5" style="margin-right:110px" ng-repeat="questionItem in questionList">
                                         <div class="form-group">
+                                            <div class="alert alert-info">
+                                                {{questionItem.tip}}
+                                            </div>
                                             <h4><strong>{{$parent.$index*vm.windowsCount+$index+1 }}.</strong>  {{questionItem.title}} </h4>
                                             <div class="radio" ng-repeat="option in questionItem.options">
                                                 <label>
                                                     <input type="radio" data-ng-value="true" ng-required="!option.isCorrect" ng-model="option.isCorrect" 
-                                                        name="section-{{$parent.$parent.$index+1}}-{{$parent.$index+1}}">{{$index+1}}. {{option.answer}}
+                                                        name="section-{{$parent.$parent.$index+1}}-{{$parent.$index+1}}" disabled>{{$index+1}}. {{option.answer}}
                                                     </label>
+                                            </div>
+                                            <div class="alert" ng-class="{ 'alert-danger': !vm.IsCorrect(questionItem._id), 'alert-success': vm.IsCorrect(questionItem._id) }">
+                                                your answer is {{ vm.findAnswerIndex(questionItem._id) }}
                                             </div>
                                         </div>
                                     </div>
@@ -44,7 +51,6 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-ng-click="vm.modal.cancel()">{{vm.modalData.options.closeButtonText}}</button>
-            <button type="submit" id="btnExam" class="btn btn-primary" ng-click="vm.onSubmit()">{{vm.modalData.options.okButtonText}}</button>
         </div>
         <form>
 </div>

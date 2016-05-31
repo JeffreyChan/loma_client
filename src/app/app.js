@@ -11,6 +11,18 @@
       });
     };
   }
+  if (!Array.prototype.getIndexBy) {
+    Array.prototype.getIndexBy = function (name, value) {
+      for (var i = 0; i < this.length; i++) {
+        if (this[i][name] == value) {
+          return i;
+        }
+      }
+      return -1;
+    }
+  }
+  
+  //var data = tv[tv.getIndexBy("id", 2)]
   angular.module('underscore', []);
   angular.module('underscore').factory('_', ['$window', function ($window) {
     return $window._; // assumes underscore has already been loaded on the page
@@ -46,6 +58,11 @@
         controller: 'examCtrl',
         controllerAs: 'vm'
       })
+      .when('/record-list', {
+        templateUrl: '/tmp/record/list.view.html',
+        controller: 'recordCtrl',
+        controllerAs: 'vm'
+      })
       .when('/register', {
         template: '<h1>hell</h1>'
       })
@@ -70,7 +87,7 @@
   }
 
   myModule.value("LOMA_CONFIG", {
-    rootUrl:"http://localhost:2000"
+    rootUrl: "http://localhost:2000"
   });
 
   myModule
