@@ -28,7 +28,7 @@
                                     <thead>
                                         <tr>
                                             <th>category</th>
-                                            <th>title</th>
+                                            <th class="col-sm-8">title</th>
                                             <th>create date</th>
                                             <th>operation</th>
                                         </tr>
@@ -36,7 +36,7 @@
                                     <tbody>
                                         <tr ng-repeat="question in vm.questionData">
                                             <td>{{question.category}}</td>
-                                            <td >{{question.title}}
+                                            <td>{{question.title}}
                                             </td>
                                             <td>{{question.create_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                             <td class="center">
