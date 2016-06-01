@@ -28,6 +28,7 @@
                                     <thead>
                                         <tr>
                                             <th>category</th>
+                                            <th>sequence</th>
                                             <th class="col-sm-8">title</th>
                                             <th>create date</th>
                                             <th>operation</th>
@@ -36,7 +37,8 @@
                                     <tbody>
                                         <tr ng-repeat="question in vm.questionData">
                                             <td>{{question.category}}</td>
-                                            <td><span data-ng-bind-html="question.title | limitTo:200 | addHtmlLineBreaks">
+                                            <td>{{$index + 1}}</td>
+                                            <td><span data-ng-bind-html="question.title | limitTo:200 | addHtmlLineBreaks"></span><span>...</span>
                                             </td>
                                             <td>{{question.create_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                             <td class="center">

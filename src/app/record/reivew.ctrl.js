@@ -63,7 +63,7 @@
         }
 
         vm.doGetReviewRcord = function () {
-            examService.getReviewRcord(vm.modalData.record._id).success(function (data) {
+            examService.getReviewRecord(vm.modalData.record._id).success(function (data) {
                 vm.formData = data.entity;
                 vm.windowQuestionList = _.chain(vm.formData.questions).groupBy(function (element, index) {
                     return Math.floor(index / vm.windowsCount);

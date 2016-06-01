@@ -8,13 +8,15 @@
     "commonService",
     "examService",
     "popupService",
-    "$timeout"];
+    "$timeout",
+    "Notification"];
   function recordCtrl(
     $scope,
     commonService,
     examService,
     popupService,
-    $timeout) {
+    $timeout,
+    Notification) {
     var vm = this;
 
     vm.showNumEntries = [10, 25, 50, 100];
@@ -47,7 +49,30 @@
       };
 
       popupService.showModal(modalDefaults, customModalOptions).then(function (result) {
-        
+
+      });
+    }
+
+    vm.popupremoveForm = function (entityId) {
+      var customModalOptions = {
+        closeButtonText: 'Cancel',
+        okButtonText: 'Confirm',
+        headerText: "Delete Exam Record",
+        bodyText: "Are you sure you want to delete this record?",
+      };
+
+      popupService.showModal({}, customModalOptions).then(function (result) {
+        examService.removeRecord(entityId)
+          .success(function (data) {
+            $timeout(function () {
+              vm.initRecordsList(vm.currentPage, vm.pageCount);
+            }, 500);
+
+            Notification.success("Delete record successfully");
+          })
+          .error(function (errorInfo) {
+            Notification.error({ message: errorInfo.error, delay: 5000 });
+          });
       });
     }
 

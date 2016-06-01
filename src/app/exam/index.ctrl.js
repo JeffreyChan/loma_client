@@ -6,12 +6,16 @@
     examCtrl.$inject = [
         "_",
         "$scope",
+        "$location",
+        "$timeout",
         "Notification",
         "categoryService",
         "popupService"];
     function examCtrl(
         _,
         $scope,
+        $location,
+        $timeout,
         Notification,
         categoryService,
         popupService) {
@@ -27,7 +31,7 @@
             }
             vm.popupExamForm();
         }
-        
+
         vm.doGetChildCategory = function () {
             categoryService.getchildCategory()
                 .success(function (data) {
@@ -47,18 +51,18 @@
 
             var modalDefaults = {
                 templateUrl: "tmp/exam/examDialog.view.html",
-                windowClass:"examModal",
+                windowClass: "examModal",
                 controller: "examDialogCtrl",
                 controllerAs: "vm",
                 resolve: {
                     modalData: function () {
                         return {
                             options: customModalOptions,
-                            categoryId : vm.formData.category,
-                            categoryName: _.find(vm.catList, function(item){
+                            categoryId: vm.formData.category,
+                            categoryName: _.find(vm.catList, function (item) {
                                 return _.isEqual(item._id, vm.formData.category);
                             }).name,
-                            username:vm.formData.userName
+                            username: vm.formData.userName
                         };
                     }
                 }
@@ -67,7 +71,14 @@
             popupService.showModal(modalDefaults, customModalOptions).then(function (result) {
                 var tmpMessage = "Your Exam done!";
                 Notification.success(tmpMessage);
+                $timeout(function(){
+                    vm.redirectToRecord();
+                }, 2000)    
             });
+        }
+
+        vm.redirectToRecord = function () {
+            $scope.$apply(function () { $location.path("/record-list"); });
         }
 
         vm.doGetChildCategory();

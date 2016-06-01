@@ -31,7 +31,7 @@
         vm.modalData = modalData;
         vm.formError = "";
         vm.formData = {};
-        vm.windowsCount = 6;
+        vm.windowsCount = 10;
 
         vm.onSubmit = function () {
             vm.formError = "";

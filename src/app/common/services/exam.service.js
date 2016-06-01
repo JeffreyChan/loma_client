@@ -24,8 +24,12 @@
             return $http.get("{0}/{1}?page={2}&size={3}".format(LOMA_CONFIG.rootUrl, "api/exam/record", page, size));
         };
         
-        this.getReviewRcord = function(recordId){
+        this.getReviewRecord = function(recordId){
             return $http.get("{0}/{1}/{2}".format(LOMA_CONFIG.rootUrl, "api/exam/review", recordId));
+        }
+        
+        this.removeRecord = function(entityId){
+            return $http.delete("{0}/{1}/{2}".format(LOMA_CONFIG.rootUrl, "api/exam/record", entityId));
         }
     }
 
