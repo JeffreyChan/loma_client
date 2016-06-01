@@ -64,11 +64,12 @@
       popupService.showModal({}, customModalOptions).then(function (result) {
         examService.removeRecord(entityId)
           .success(function (data) {
+            popupService.showDialog();
             $timeout(function () {
               vm.initRecordsList(vm.currentPage, vm.pageCount);
+              popupService.closeDialog();
+              Notification.success("Delete record successfully");
             }, 500);
-
-            Notification.success("Delete record successfully");
           })
           .error(function (errorInfo) {
             Notification.error({ message: errorInfo.error, delay: 5000 });

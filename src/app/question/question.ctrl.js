@@ -72,11 +72,12 @@
       popupService.showModal({}, customModalOptions).then(function (result) {
         questionService.removeQuestion(entityId)
           .success(function (data) {
+            popupService.showDialog();
             $timeout(function () {
               vm.initQuestionList(vm.currentPage, vm.pageCount);
+              popupService.closeDialog();
+              Notification.success("Delete question successfully");
             }, 500);
-
-            Notification.success("Delete question successfully");
           })
           .error(function (errorInfo) {
             Notification.error({ message: errorInfo.error, delay: 5000 });

@@ -66,11 +66,12 @@
       popupService.showModal({}, customModalOptions).then(function (result) {
         categoryService.removeCategory(customModalOptions.entityId)
           .success(function (data) {
+            popupService.showDialog();
             $timeout(function () {
-               vm.initCategoryList(vm.currentPage, vm.pageCount);
+              vm.initCategoryList(vm.currentPage, vm.pageCount);
+              popupService.closeDialog();
+              Notification.success("Delete category successfully");
             }, 500);
-
-            Notification.success("Delete category successfully");
           })
           .error(function (errorInfo) {
             Notification.error({ message: errorInfo.error, delay: 5000 });
