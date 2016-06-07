@@ -44,3 +44,5 @@ div.examModal .modal-dialog {
 textarea {
    resize: none;
 }
+
+em { text-decoration:underline; }
