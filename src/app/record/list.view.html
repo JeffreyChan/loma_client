@@ -28,6 +28,7 @@
                                             <th>User</th>
                                             <th>category</th>
                                             <th>total</th>
+                                            <th>score</th>
                                             <th>accuracy</th>
                                             <th>right</th>
                                             <th>wrong</th>
@@ -40,6 +41,7 @@
                                             <td>{{rec.user}}</td>
                                             <td>{{rec.category}}</td>
                                             <td>{{rec.right + rec.wrong}}</td>
+                                            <td>{{rec.right * 1.667 | number:2}}</td>
                                             <td class="alert-info">{{((rec.right / (rec.right + rec.wrong)) * 100) | number:2}}%</td>
                                             <td class="alert-success"> {{rec.right}}</td>
                                             <td class="alert-danger">{{rec.wrong}}</td>

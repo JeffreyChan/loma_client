@@ -31,11 +31,12 @@
                                                </h4>
                                             </div>
 
-                                            <div class="radio" ng-repeat="option in questionItem.options">
-                                                <label>
-                                                    <input type="radio" data-ng-value="true" ng-required="!option.isCorrect" ng-model="option.isCorrect" 
-                                                        name="section-{{$parent.$parent.$index+1}}-{{$parent.$index+1}}">{{$index+1}}. {{option.answer}}
-                                                    </label>
+                                            <div class="radio" >
+                                                <label class="radio" ng-repeat="option in questionItem.options">
+                                                    <input type="radio" ng-change="vm.updateCheckOption(questionItem, option)" data-ng-value="true" data-ng-model="option.isCorrect" 
+                                                        name="section{{questionItem._id}}">{{$index+1}}. {{option.answer}}
+                                                        </br>
+                                                 </label>
                                             </div>
                                         </div>
                                     </div>

@@ -34,10 +34,10 @@
                                                     <span ng-bind-html="questionItem.title | addHtmlLineBreaks"></span>
                                                </h4>
                                             </div>
-                                            <div class="radio" ng-repeat="option in questionItem.options">
-                                                <label>
+                                            <div class="radio">
+                                                <label class="radio" ng-repeat="option in questionItem.options">
                                                     <input type="radio" data-ng-value="true" ng-required="!option.isCorrect" ng-model="option.isCorrect" 
-                                                        name="section-{{$parent.$parent.$index+1}}-{{$parent.$index+1}}" disabled>{{$index+1}}. {{option.answer}}
+                                                        name="section-{{questionItem._id}}" disabled>{{$index+1}}. {{option.answer}}
                                                     </label>
                                             </div>
                                             <div class="alert" ng-class="{ 'alert-danger': !vm.IsCorrect(questionItem._id), 'alert-success': vm.IsCorrect(questionItem._id) }">

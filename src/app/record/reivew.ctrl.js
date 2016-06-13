@@ -27,7 +27,7 @@
         vm.modalData = modalData;
         vm.formError = "";
         vm.formData = {};
-        vm.windowsCount = 6;
+        vm.windowsCount = 10;
 
         vm.modal = {
             ok: function (result) {
@@ -47,7 +47,7 @@
             var question = _.find(vm.formData.questions, function (item) {
                 return _.isEqual(item._id, queId);
             });
-
+                
             return question.options.getIndexBy("_id", answerId) + 1;
         }
 

@@ -72,6 +72,13 @@
                 $uibModalInstance.dismiss('cancel');
             }
         };
+        
+        vm.updateCheckOption = function(question, option) {
+            _.each(question.options, function(o) {
+                    o.isCorrect = false;
+            });
+            option.isCorrect = true;
+        }
 
         vm.doGetExamQuestion = function () {
             examService.getQuestionsByCategory(vm.modalData.categoryId).success(function (data) {
