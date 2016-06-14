@@ -36,7 +36,7 @@
             categoryService.getchildCategory()
                 .success(function (data) {
                     vm.catList = data.entity;
-                    vm.formData.category = vm.catList[0]._id;
+                    vm.formData.category = vm.catList[14]._id;
                 }).error(function (err) {
                     vm.formError = "Sorry, something's gone wrong, please try again later";
                 });

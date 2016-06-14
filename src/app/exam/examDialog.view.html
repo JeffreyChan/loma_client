@@ -31,7 +31,7 @@
                                                </h4>
                                             </div>
 
-                                            <div class="radio" >
+                                            <div class="radio">
                                                 <label class="radio" ng-repeat="option in questionItem.options">
                                                     <input type="radio" ng-change="vm.updateCheckOption(questionItem, option)" data-ng-value="true" data-ng-model="option.isCorrect" 
                                                         name="section{{questionItem._id}}">{{$index+1}}. {{option.answer}}

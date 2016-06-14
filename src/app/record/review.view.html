@@ -36,7 +36,7 @@
                                             </div>
                                             <div class="radio">
                                                 <label class="radio" ng-repeat="option in questionItem.options">
-                                                    <input type="radio" data-ng-value="true" ng-required="!option.isCorrect" ng-model="option.isCorrect" 
+                                                    <input type="radio" data-ng-value="true" ng-model="option.isCorrect" 
                                                         name="section-{{questionItem._id}}" disabled>{{$index+1}}. {{option.answer}}
                                                     </label>
                                             </div>
