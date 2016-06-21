@@ -20,7 +20,7 @@
     var vm = this;
 
     vm.showNumEntries = [10, 25, 50, 100];
-    vm.pageCount = vm.showNumEntries[0];
+    vm.pageCount = vm.showNumEntries[1];
     vm.currentPage = 1;
     vm.totalItems = 0;
     // Limit number for pagination size.

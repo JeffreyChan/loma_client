@@ -22,16 +22,18 @@
     $timeout,
     Notification) {
     var vm = this;
-
+    vm.title = "";
+    
     vm.showNumEntries = [10, 25, 50, 100];
     vm.pageCount = vm.showNumEntries[0];
     vm.currentPage = 1;
     vm.totalItems = 0;
     // Limit number for pagination size.
     vm.pageMaxSize = 10;
-
-    vm.initQuestionList = function (page, size) {
-      questionService.getQuestionList(page, size)
+    
+    console.log(vm.title);
+    vm.initQuestionList = function (title, page, size) {
+      questionService.getQuestionList(title, page, size)
         .success(function (data) {
           if (commonService.isEmptyOrNull(data.entity)) {
             Notification.error({ message: "No question found!", delay: 5000 });
@@ -48,11 +50,15 @@
     };
 
     $scope.$watch('vm.pageCount', function () {
-      vm.initQuestionList(vm.currentPage, vm.pageCount);
+      vm.searchQuestion();
     });
-
+    
+    vm.searchQuestion = function(){
+      vm.initQuestionList(vm.title, vm.currentPage, vm.pageCount);
+    }
+    
     vm.pageChanged = function () {
-      vm.initQuestionList(vm.currentPage, vm.pageCount);
+      vm.searchQuestion();
     };
 
     vm.delayInfo = function (message) {
@@ -74,7 +80,7 @@
           .success(function (data) {
             popupService.showDialog();
             $timeout(function () {
-              vm.initQuestionList(vm.currentPage, vm.pageCount);
+              vm.searchQuestion();
               popupService.closeDialog();
               Notification.success("Delete question successfully");
             }, 500);
@@ -110,7 +116,7 @@
         var tmpMessage = "Create Question done!";
         Notification.success(tmpMessage);
         $timeout(function () {
-          vm.initQuestionList(vm.currentPage, vm.pageCount);
+          vm.searchQuestion();
         }, 500);
       });
     };
@@ -142,7 +148,7 @@
         var tmpMessage = "Update Question done!";
         Notification.success(tmpMessage);
         $timeout(function () {
-          vm.initQuestionList(vm.currentPage, vm.pageCount);
+          vm.searchQuestion();
         }, 500);
       });
     };

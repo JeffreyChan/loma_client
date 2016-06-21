@@ -1,5 +1,4 @@
 <div id="page-wrapper">
-
     <div class="row" style="margin-top:20px">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -11,6 +10,17 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12" >
+                            <div class="col-sm-8">
+                                <input id="serach" name="title" class="form-control" placeholder="Search Question Title" ng-model="vm.title" />
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-info" ng-click="vm.searchQuestion()">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
                     <div class="dataTable_wrapper">
                         <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                             <div class="row">
@@ -20,6 +30,7 @@
                                             <option value="1">1</option>
                                         </select> entries</label></div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="row">

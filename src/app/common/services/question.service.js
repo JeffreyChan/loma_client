@@ -13,10 +13,10 @@
             return $http.get("{0}/{1}/{2}".format(LOMA_CONFIG.rootUrl, "api/question", entityId));
         }
         
-        this.getQuestionList = function (page, size) {
+        this.getQuestionList = function (title, page, size) {
             page = page || 1;
             size = size || 10;
-            return $http.get("{0}/{1}?page={2}&size={3}".format(LOMA_CONFIG.rootUrl, "api/question", page, size));
+            return $http.get("{0}/{1}?page={2}&size={3}&title={4}".format(LOMA_CONFIG.rootUrl, "api/question", page, size, title));
         };
 
         this.createQuestion = function (question) {
